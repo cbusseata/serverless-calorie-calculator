@@ -1,0 +1,34 @@
+# Node
+node_modules
+
+# Python cache
+__pycache__
+app/__pycache__
+
+# Bytecode from python
+*.pyc
+
+# Automatically created config file
+stack.*
+
+# Automatically created app files
+.serverless
+serverless_wsgi.py
+wsgi.py
+.wsgi_app
+.aws_credentials
+
+# OS X
+.DS_Store
+
+# Jetbrains
+.idea
+
+# Terraform
+*.tfstate
+*.backup
+.terraform/
+
+# Vim tmp files
+*.swp
+

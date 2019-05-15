@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  app:
+    container_name: calorie-calculator_app
+    build:
+      context: ../../
+      dockerfile: ops/docker/app/Dockerfile
+    volumes:
+      - ../../:/app/
+    environment:
+      - "STAGE=local"
+      - "FLASK_APP=/app/src/functions/api.py"
+    ports:
+      - 3000:3000
+    networks:
+      app-env:
+    tty: true
+
+networks:
+  app-env:
+

@@ -1,0 +1,57 @@
+service: calorie-calculator
+
+# can't have plugins in another file, else they can't be used in our local dev env. (and probably in aws too)
+plugins:
+  - serverless-python-requirements        # Package python requirements from requirements.txt
+  - serverless-wsgi                       # Translate API Gateway event to something Flask can use
+  - serverless-stage-manager              # Will throw an error if trying to deploy to a stage that does not exist (see custom.stages)
+  - serverless-plugin-bind-deployment-id  # Gets the deployment ID, for use in setting up API Gateaway logs (see ApiGatewayStage)
+  - serverless-pseudo-parameters          # Helps replace certain AWS params (e.g. #{AWS::AccountId})
+  - serverless-offline-python             # Emulate python lambda/API Gateway runtime locally
+  - serverless-aws-documentation          # Generate swagger documentation
+
+package:
+  exclude:
+    # Exclude everything that does not NEED to be in AWS
+    - .circleci/**
+    - .serverless/**
+    - .gitignore
+    - docs/**
+    - node_modules/**
+    - ops/**
+    - tests/**
+    - Makefile
+    - package*
+    - README.md
+    - requirements.txt
+
+custom:
+  wsgi:
+    app: src/functions/api.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+    slim: true # Removes all tests, information, and caches from the installed packages
+    noDeploy: # Dev dependencies, and dependencies for running migrations (not needed in AWS)
+      - pytest
+      - RESTinstance
+      - robotframework
+  stages: # Blocks deployment if whatever is passed in --stage CLI option is not in this array
+    - local
+    - dev
+    - staging
+    - prod
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: 'us-east-1'
+  stage: ${opt:stage, 'dev'}
+
+functions:
+  api:
+    handler: wsgi.handler
+    timeout: 10
+    events:
+      - http: ANY /
+      - http: 'ANY {prox+}'
