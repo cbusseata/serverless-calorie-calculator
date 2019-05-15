@@ -2,13 +2,13 @@ service: calorie-calculator
 
 # can't have plugins in another file, else they can't be used in our local dev env. (and probably in aws too)
 plugins:
-  - serverless-python-requirements        # Package python requirements from requirements.txt
-  - serverless-wsgi                       # Translate API Gateway event to something Flask can use
-  - serverless-stage-manager              # Will throw an error if trying to deploy to a stage that does not exist (see custom.stages)
-  - serverless-plugin-bind-deployment-id  # Gets the deployment ID, for use in setting up API Gateaway logs (see ApiGatewayStage)
-  - serverless-pseudo-parameters          # Helps replace certain AWS params (e.g. #{AWS::AccountId})
-  - serverless-offline-python             # Emulate python lambda/API Gateway runtime locally
-  - serverless-aws-documentation          # Generate swagger documentation
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-stage-manager
+  - serverless-plugin-bind-deployment-id
+  - serverless-pseudo-parameters
+  - serverless-offline
+  - serverless-aws-documentation
 
 package:
   exclude:
