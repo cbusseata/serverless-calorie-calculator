@@ -1,2 +1,2 @@
-# serverless-calorie-counter
-Serverless API for counting calories
+# Serverless Calorie Calculator
+Basic serverless demo API for calculating calories burned.
