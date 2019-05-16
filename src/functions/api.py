@@ -8,4 +8,4 @@ def hello():
     return jsonify({
         'status': 'SUCCESS',
         'message': 'Hello World!'
-    }, 200)
+    }), 200

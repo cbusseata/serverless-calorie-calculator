@@ -8,6 +8,9 @@ app/__pycache__
 # Bytecode from python
 *.pyc
 
+# Python virtual environment
+venv
+
 # Automatically created config file
 stack.*
 

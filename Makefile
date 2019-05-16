@@ -12,6 +12,6 @@ build:
 enter:
 	@./ops/docker/scripts/enter.sh ${COMPONENT}
 logs:
-	docker logs calorie-counter_app -f
+	docker logs calorie-calculator_app -f
 
 -include Makefile.d/*.mk
