@@ -47,11 +47,21 @@ provider:
   runtime: python3.7
   region: 'us-east-1'
   stage: ${opt:stage, 'dev'}
+  logRetentionInDays: 2 # Just being cheap here
+  #apiKeys:
+  #  - ${self:service}-${self:provider.stage}-test
 
 functions:
   api:
     handler: wsgi_handler.handler
     timeout: 10
     events:
+      #- http:
+      #    path: calculate/run
+      #    method: get
+      #    private: true
+      #    documentation:
+      #      summary: Calculates calories burned while running
+      #      # @TODO: fill in the rest
       - http: ANY /
-      - http: 'ANY {prox+}'
+      - http: 'ANY {prox+}'      

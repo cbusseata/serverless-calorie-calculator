@@ -21,5 +21,4 @@ WORKDIR /app
 
 RUN cp -r /tmp/install/* .
 
-#@TODO: --apiKey local
-CMD serverless offline start --host=0.0.0.0 --stage local
+CMD serverless offline start --host=0.0.0.0 --stage local --apiKey local-test
