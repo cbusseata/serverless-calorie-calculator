@@ -7,7 +7,7 @@ plugins:
   - serverless-stage-manager
   - serverless-plugin-bind-deployment-id
   - serverless-pseudo-parameters
-  - serverless-offline
+  - serverless-offline-python # @TODO: switch this to serverless-offline when issues are resolved
   - serverless-aws-documentation
 
 package:
@@ -44,14 +44,22 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.6
   region: 'us-east-1'
   stage: ${opt:stage, 'dev'}
+  logRetentionInDays: 2 # Just being cheap here
+  apiKeys:
+    - ${self:service}-${self:provider.stage}-test
 
 functions:
   api:
     handler: wsgi_handler.handler
     timeout: 10
     events:
-      - http: ANY /
-      - http: 'ANY {prox+}'
+      - http:
+          path: calculate/run
+          method: get
+          private: true
+          documentation:
+            summary: Calculates calories burned while running
+            # @TODO: fill in the rest

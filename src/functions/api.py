@@ -3,9 +3,10 @@ import json
 from flask import Flask, jsonify
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
+
+@app.route("/calculate/run", methods=["GET"])
+def calculate_run():
     return jsonify({
         'status': 'SUCCESS',
-        'message': 'Hello World!'
+        'calories': 1200
     }), 200

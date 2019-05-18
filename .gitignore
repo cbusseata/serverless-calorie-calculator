@@ -17,6 +17,8 @@ stack.*
 # Automatically created app files
 .serverless
 serverless_wsgi.py
+.serverless-wsgi
+wsgi_handler.py
 wsgi.py
 .wsgi_app
 .aws_credentials
@@ -35,3 +37,4 @@ wsgi.py
 # Vim tmp files
 *.swp
 
+.vscode
