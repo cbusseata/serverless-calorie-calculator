@@ -15,6 +15,6 @@
     "serverless-wsgi": "^1.7.2"
   },
   "devDependencies": {
-    "serverless-offline": "^4.10.3"
+    "serverless-offline-python": "^3.22.0"
   }
 }

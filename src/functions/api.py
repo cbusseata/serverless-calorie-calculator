@@ -3,14 +3,8 @@ import json
 from flask import Flask, jsonify
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return jsonify({
-        'status': 'SUCCESS',
-        'message': 'Hello World!'
-    }), 200
 
-@app.route("/calculate/run")
+@app.route("/calculate/run", methods=["GET"])
 def calculate_run():
     return jsonify({
         'status': 'SUCCESS',
