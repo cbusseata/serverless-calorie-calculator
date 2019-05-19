@@ -15,7 +15,6 @@ venv
 stack.*
 
 # Automatically created app files
-.serverless
 serverless_wsgi.py
 .serverless-wsgi
 wsgi_handler.py
