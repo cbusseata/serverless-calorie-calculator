@@ -37,3 +37,7 @@ wsgi.py
 *.swp
 
 .vscode
+
+# Serverless will create this automatically
+requirements.txt
+

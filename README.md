@@ -1,14 +1,14 @@
 # Serverless Calorie Calculator
 Basic serverless demo API for calculating calories burned.
 
-## Adding modules
-From the root of the repo:
+## Adding/removing modules
+Use pipenv from inside the app container
 ````bash
-make pip-install MODULE=<python module>
-````
+$ make enter
 
-## Removing modules
-From the root of the repo:
-````bash
-make pip-uninstall MODULE=<python module>
+  Enter the name of the service that you want to access, choices are:
+  app
+  Service name: app
+
+bash-4.2# pipenv install <module>
 ````

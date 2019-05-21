@@ -10,13 +10,16 @@ RUN yum install -y curl
 RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash
 RUN yum install -y nodejs
 
+RUN pip install pipenv
+
 # Create an installation directory
 RUN mkdir /tmp/install
 
 # Install python modules
 WORKDIR /tmp/install
-ADD requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+ADD Pipfile Pipfile
+ADD Pipfile.lock Pipfile.lock
+RUN pipenv install --dev --system
 
 # Install node modules
 ADD package.json package.json
@@ -28,12 +31,6 @@ WORKDIR /app
 
 # Move over the install files
 RUN cp -r /tmp/install/* .
-
-# Setup virtual environment for when we need to add modules later, otherwise we pip freeze every global module
-#  in the app container
-ADD requirements.txt requirements.txt
-RUN python -m venv .
-RUN bash --rcfile "/app/venv/bin/activate" -i && pip install --ignore-installed --user -r requirements.txt
 
 # Startup serverless offline
 CMD serverless offline start --host=0.0.0.0 --stage local --apiKey local-test

@@ -32,10 +32,7 @@ custom:
   pythonRequirements:
     dockerizePip: non-linux
     slim: true # Removes all tests, information, and caches from the installed packages
-    noDeploy: # Dev dependencies, and dependencies for running migrations (not needed in AWS)
-      - pytest
-      - RESTinstance
-      - robotframework
+    usePipenv: true
   stages: # Blocks deployment if whatever is passed in --stage CLI option is not in this array
     - local
     - dev
