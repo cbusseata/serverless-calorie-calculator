@@ -4,10 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pytest = "*"
+robotframework = "*"
+restinstance = "==1.0.0rc5"
 
 [packages]
 flask = "*"
 flask-wtf = "*"
+python-measurement = {editable = true,git = "https://github.com/coddingtonbear/python-measurement"}
 
 [requires]
 python_version = "3.6"

@@ -41,3 +41,9 @@ wsgi.py
 # Serverless will create this automatically
 requirements.txt
 
+# Robot test results
+tests/acceptance/results
+
+# Terraform
+.terraform
+*.tfstate.backup

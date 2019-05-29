@@ -12,3 +12,19 @@ $ make enter
 
 bash-4.2# pipenv install <module>
 ````
+
+## Tests
+
+### Unit Tests
+This repository uses pytest for unit testing.  To execute unit tests, from within the app container:
+````bash
+pytest tests/unit
+````
+
+### Acceptance Tests
+This repository uses the robot framework for automated API acceptance testing.  To execute the robot tests,
+from within the app container:
+````bash
+tests/acceptance/runtests.sh <environment>
+````
+Replace <environment> with 'local' for testing locally.

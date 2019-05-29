@@ -1,0 +1,29 @@
+{
+	"status": {
+		"type": "integer",
+		"enum": [
+			400
+		]
+	},
+	"headers": {
+		"Content-Type": "application/json"
+	},
+	"body": {
+		"type": "object",
+		"properties": {
+			"status": {
+                "type": "string",
+                "enum": [
+                    "ERROR"
+                ]
+			},
+			"errors": {
+				"type": "object"
+			}
+		},
+		"required": [
+			"status",
+			"errors"
+		]
+	}
+}
