@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "6ebcedf2-c753-4fb7-843b-eeba78e68684",
+		"name": "Calorie Calculator",
+		"description": "Calorie calculator API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Calculate Run",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "local-test",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:3000/calculate/run?distance=2.1&hours=0&minutes=14&seconds=30&bodyweight=185&units=imperial",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "3000",
+					"path": [
+						"calculate",
+						"run"
+					],
+					"query": [
+						{
+							"key": "distance",
+							"value": "2.1"
+						},
+						{
+							"key": "hours",
+							"value": "0"
+						},
+						{
+							"key": "minutes",
+							"value": "14"
+						},
+						{
+							"key": "seconds",
+							"value": "30"
+						},
+						{
+							"key": "bodyweight",
+							"value": "185"
+						},
+						{
+							"key": "units",
+							"value": "imperial"
+						}
+					]
+				},
+				"description": "Calculate calories burned while running"
+			},
+			"response": []
+		},
+		{
+			"name": "Calculate Walk",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "local-test",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:3000/calculate/walk?distance=2.1&hours=0&minutes=14&seconds=30&bodyweight=185&units=imperial",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "3000",
+					"path": [
+						"calculate",
+						"walk"
+					],
+					"query": [
+						{
+							"key": "distance",
+							"value": "2.1"
+						},
+						{
+							"key": "hours",
+							"value": "0"
+						},
+						{
+							"key": "minutes",
+							"value": "14"
+						},
+						{
+							"key": "seconds",
+							"value": "30"
+						},
+						{
+							"key": "bodyweight",
+							"value": "185"
+						},
+						{
+							"key": "units",
+							"value": "imperial"
+						}
+					]
+				},
+				"description": "Calculate calories burned while walking"
+			},
+			"response": []
+		}
+	]
+}

@@ -2,59 +2,79 @@ from flask_wtf import FlaskForm
 from wtforms import fields, validators
 
 
-# Total calories burned = Duration (in minutes)*(MET*3.5*weight in kg)/200
 class CalculateRunForm(FlaskForm):
+    activity = fields.StringField(
+        'Activity',
+        validators=[
+            validators.DataRequired(),
+            validators.AnyOf(
+                values=['walk', 'run'],
+                message="I don't know what nonsense you're doing, but we only support 'walk' and 'run'"
+            )
+        ]
+    )
+
     distance = fields.FloatField(
         'Distance', 
         validators=[
             validators.DataRequired(),
             validators.NumberRange(
                 min=0.01, 
-                message="Come on, distance must be at least %(min)s miles!"
+                message="Come on, distance must be at least %(min)s!"
             )
         ]
     )
+
     # Duration
     hours = fields.IntegerField(
         'Hours',
         validators=[
             validators.Optional(),
             validators.NumberRange(min=0) # Cannot be negative
-        ]
+        ],
+        default=0
     )
     minutes = fields.IntegerField(
         'Minutes',
         validators=[
             validators.Optional(),
             validators.NumberRange(min=0) # Cannot be negative
-        ]
+        ],
+        default=0
     )
     seconds = fields.IntegerField(
         'Seconds',
         validators=[
             validators.Optional(),
             validators.NumberRange(min=0) # Cannot be negative
-        ]
+        ],
+        default=0
     )
-    weight = fields.FloatField(
-        'Weight', 
+
+    bodyweight = fields.FloatField(
+        'Bodyweight', 
         validators=[
             validators.DataRequired(),
             validators.NumberRange(
                 min=0.01, 
-                message="Weight must be at least %(min)s pounds"
+                message="Bodyweight must be at least %(min)s"
             )
         ]
     )
-    """
-    # @TODO
+
     elevation_gain = fields.IntegerField(
         'elevation_gain',
         validators=[
-            # Not sure about this one yet
-            #validators.DataRequired(),
-            validators.Optional(), # @TODO: for now...
-            validators.NumberRange(min=0, message="Elevation gain must be at least %(min)s feet")
-        ]
+            validators.Optional()
+        ],
+        default=0
     )
-    """
+    
+    units = fields.StringField(
+        'Units',
+        validators=[
+            validators.Optional(),
+            validators.AnyOf(values=['imperial', 'metric'])
+        ],
+        default='imperial'
+    )
