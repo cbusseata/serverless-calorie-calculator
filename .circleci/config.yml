@@ -48,9 +48,10 @@ references:
 jobs:
   deploy_staging:
     docker:
-      - image: circleci/python:3.6-node
+      - image: lambci/lambda:build-python3.6
     steps:
       - checkout
+      - *install_node
       - *install_serverless
       - *install_npm_modules
       - *install_pipenv
