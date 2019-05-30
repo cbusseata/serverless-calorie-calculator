@@ -8,17 +8,17 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install serverless
-        command: sudo npm install -g serverless@1.42.3
+          name: Install serverless
+          command: sudo npm install -g serverless@1.42.3
       - run:
-        name: Install npm modules
-        command: npm install
+          name: Install npm modules
+          command: npm install
       - run:
-        name: Install pipenv
-        command: sudo pip install pipenv
+          name: Install pipenv
+          command: sudo pip install pipenv
       - run:
-        name: Install python modules
-        command: sudo pipenv install --system
+          name: Install python modules
+          command: sudo pipenv install --system
   unit_test:
     docker:
       - image: circleci/python:3.6-node
