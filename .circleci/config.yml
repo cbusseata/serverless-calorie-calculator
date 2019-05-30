@@ -1,7 +1,7 @@
 version: 2
 
 references:
-  install_node:
+  install_node: &install_node
     run:
       name: Install node
       command: curl -sL https://rpm.nodesource.com/setup_8.x | bash ; yum install -y nodejs
