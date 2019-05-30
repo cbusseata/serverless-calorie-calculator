@@ -56,7 +56,7 @@ provider:
   runtime: python3.6
   region: 'us-east-1'
   stage: ${opt:stage, 'dev'}
-  logRetentionInDays: 2 # Just being cheap here
+  logRetentionInDays: 1 # Just being cheap here
   apiKeys:
     - ${self:service}-${self:provider.stage}-test
 
