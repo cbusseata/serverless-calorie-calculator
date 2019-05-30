@@ -26,7 +26,52 @@ references:
       name: Run unit tests
       command: pytest tests/unit
 
+  sls_deploy_dev: &sls_deploy_dev
+    run:
+      name: Deploy to dev
+      command:  npx serverless deploy --stage dev --conceal
+      environment:
+        - SLS_DEBUG: 1
+
+  sls_deploy_staging: &sls_deploy_staging
+    run:
+      name: Deploy to staging
+      command:  npx serverless deploy --stage staging --conceal
+      environment:
+        - SLS_DEBUG: 1
+
+  sls_deploy_prod: &sls_deploy_prod
+    run:
+      name: Deploy to production
+      command:  npx serverless deploy --stage prod --conceal
+      environment:
+        - SLS_DEBUG: 1
+
 jobs:
+  deploy_dev:
+    docker:
+      - image: circleci/python:3.6-node
+    steps:
+      - checkout
+      - *install_serverless
+      - *install_npm_modules
+      - *install_pipenv
+      - *install_python_modules
+      - *unit_test
+      - *sls_deploy_dev
+
+  deploy_staging:
+    docker:
+      - image: circleci/python:3.6-node
+    steps:
+      - checkout
+      - *install_serverless
+      - *install_npm_modules
+      - *install_pipenv
+      - *install_python_modules
+      - *unit_test
+      - *sls_deploy_staging
+
   build_and_unit_test:
     docker:
       - image: circleci/python:3.6-node
@@ -42,6 +87,14 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - deploy_dev:
+          filters:
+            branches:
+              only: dev
+      - deploy_staging:
+          filters:
+            branches:
+              only: staging
       - build_and_unit_test:
           filters:
             branches:
