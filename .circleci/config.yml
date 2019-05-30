@@ -34,8 +34,8 @@ workflows:
     jobs:
       - build
       - unit_test:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
