@@ -33,7 +33,7 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test:
+      - unit_test:
         requires:
           - build
         filters:
