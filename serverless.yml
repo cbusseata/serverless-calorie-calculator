@@ -1,6 +1,5 @@
 service: calorie-calculator
 
-# can't have plugins in another file, else they can't be used in our local dev env. (and probably in aws too)
 plugins:
   - serverless-python-requirements
   - serverless-wsgi
@@ -40,24 +39,22 @@ custom:
     - prod
   documentation:
     info:
-      version: "0.1" # This must get updated in order for API Gateway to pick up changes
+      version: "0.1" # Update this number whenever a change is made
       title: Calorie calculator
       description: This API calculates calories burned during an activity
       contact:
         name: Colin Busse
       models:
         -
-          name: CalculateRunValidResponse
-          description: This is a successful response
+          name: CalculateResponseSuccess
+          description: This is a successful response from the calculate endpoint
           contentType: "application/json"
-          # @TODO:
-          #schema: ${file(src/functions/api/schema/response/calculate_run_success.json)}
+          schema: ${file(src/functions/api/schemas/response/calculate_success.json)}
         -
-          name: CalculateRunBadRequestResponse
-          description: This is an error response due to a bad request
+          name: CalculateResponseError
+          description: This is an error response from the calculate endpoint due to a bad request
           contentType: "application/json"
-          # @TODO:
-          #schema: ${file(src/functions/api/schema/response/calculate_run_badrequest.json)}
+          schema: ${file(src/functions/api/schemas/response/bad_request.json)}
 
 provider:
   name: aws
@@ -86,30 +83,42 @@ functions:
               -
                 name: x-api-key
                 description: API key
+            pathParams:
+              - name: activity
+                description: The name of the activity to calculate calories for
             queryParams:
               -
                 name: distance
-                description: Distance ran (in miles)
+                description: Distance ran (miles or kilometers)
               -
                 name: hours
-                description: The number of hours spent running
+                description: Number of hours spent running
               -
                 name: minutes
-                description: The number of minutes spent running
+                description: Number of minutes spent running
               -
                 name: seconds
-                description: The number of seconds spent running
+                description: Number of seconds spent running
               -
-                name: weight
-                description: The bodyweight (in pounds) of the athlete
+                name: bodyweight
+                description: Bodyweight of the athlete (pounds or kilograms)
+              -
+                name: elevation_gain
+                description: Net elevation gain (feet or meters)
+              -
+                name: units
+                description: System of measurement to use for the incoming distances/weight (imperial or metric)
             methodResponses:
               - statusCode: 200
                 responseBody:
                   description: A successful response object
                 responseModels:
-                  "application/json": CalculateRunValidResponse
+                  "application/json": CalculateResponseSuccess
               - statusCode: 400
                 responseBody:
                   description: An unsuccessful response object due to a bad request
                 responseModels:
-                  "application/json": CalculateRunBadRequestResponse
+                  "application/json": CalculateResponseError
+              - statusCode: 403
+                responseBody:
+                  description: Forbidden, bad or missing API key

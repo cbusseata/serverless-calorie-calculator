@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "error response to a bad request",
+	"type": "object",
+    "properties": {
+        "status": {
+            "type": "string",
+            "enum": [
+                "ERROR"
+            ]
+        },
+        "errors": {
+            "type": "object"
+        }
+    },
+    "required": [
+        "status",
+        "errors"
+    ]
+}
