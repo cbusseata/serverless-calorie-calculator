@@ -46,13 +46,13 @@ custom:
         name: Colin Busse
       models:
         -
-          name: CalculateResponseSuccess
-          description: This is a successful response from the calculate endpoint
+          name: "CalculateResponseSuccess"
+          description: "This is a successful response from the calculate endpoint"
           contentType: "application/json"
           schema: ${file(src/functions/api/schemas/response/calculate_success.json)}
         -
-          name: CalculateResponseError
-          description: This is an error response from the calculate endpoint due to a bad request
+          name: "CalculateResponseError"
+          description: "This is an error response from the calculate endpoint due to a bad request"
           contentType: "application/json"
           schema: ${file(src/functions/api/schemas/response/bad_request.json)}
 
