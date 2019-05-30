@@ -110,16 +110,16 @@ functions:
                 required: false
                 description: System of measurement to use for the incoming distances/weight (imperial or metric)
             methodResponses:
-              - statusCode: 200
+              - statusCode: "200"
                 responseBody:
                   description: A successful response object
                 responseModels:
                   "application/json": "CalculateResponseSuccess"
-              - statusCode: 400
+              - statusCode: "400"
                 responseBody:
                   description: An unsuccessful response object due to a bad request
                 responseModels:
                   "application/json": "CalculateResponseError"
-              - statusCode: 403
+              - statusCode: "403"
                 responseBody:
                   description: Forbidden, bad or missing API key
