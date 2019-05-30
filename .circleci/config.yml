@@ -1,6 +1,11 @@
 version: 2
 
 references:
+  install_node:
+    run:
+      name: Install node
+      command: curl -sL https://rpm.nodesource.com/setup_8.x | bash ; yum install -y nodejs
+
   install_serverless: &install_serverless
     run:
       name: Install serverless
@@ -55,9 +60,10 @@ jobs:
 
   build_and_unit_test:
     docker:
-      - image: circleci/python:3.6-node
+      - image: lambci/lambda:build-python3.6
     steps:
       - checkout
+      - *install_node
       - *install_serverless
       - *install_npm_modules
       - *install_pipenv
