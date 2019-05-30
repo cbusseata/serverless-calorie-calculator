@@ -38,23 +38,18 @@ custom:
     - staging
     - prod
   documentation:
-    info:
-      version: "0.1" # Update this number whenever a change is made
-      title: Calorie calculator
-      description: This API calculates calories burned during an activity
-      contact:
-        name: Colin Busse
-      models:
-        -
-          name: "CalculateResponseSuccess"
-          description: "This is a successful response from the calculate endpoint"
-          contentType: "application/json"
-          schema: ${file(src/functions/api/schemas/response/calculate_success.json)}
-        -
-          name: "CalculateResponseError"
-          description: "This is an error response from the calculate endpoint due to a bad request"
-          contentType: "application/json"
-          schema: ${file(src/functions/api/schemas/response/bad_request.json)}
+    version: "0.1" # Update this number whenever a change is made
+    title: Calorie calculator
+    description: This API calculates calories burned during an activity
+    models:
+      - name: "CalculateResponseSuccess"
+        description: "This is a successful response from the calculate endpoint"
+        contentType: "application/json"
+        schema: ${file(src/functions/api/schemas/response/calculate_success.json)}
+      - name: "CalculateResponseError"
+        description: "This is an error response from the calculate endpoint due to a bad request"
+        contentType: "application/json"
+        schema: ${file(src/functions/api/schemas/response/bad_request.json)}
 
 provider:
   name: aws
@@ -80,45 +75,51 @@ functions:
             produces:
               - application/json
             requestHeaders:
-              -
-                name: x-api-key
+              - name: x-api-key
                 description: API key
             pathParams:
               - name: activity
                 description: The name of the activity to calculate calories for
             queryParams:
-              -
-                name: distance
+              - name: distance
+                type: float
+                required: true
                 description: Distance ran (miles or kilometers)
-              -
-                name: hours
+              - name: hours
+                type: integer
+                required: false
                 description: Number of hours spent running
-              -
-                name: minutes
+              - name: minutes
+                type: integer
+                required: false
                 description: Number of minutes spent running
-              -
-                name: seconds
+              - name: seconds
+                type: integer
+                required: false
                 description: Number of seconds spent running
-              -
-                name: bodyweight
+              - name: bodyweight
+                type: float
+                required: true
                 description: Bodyweight of the athlete (pounds or kilograms)
-              -
-                name: elevation_gain
+              - name: elevation_gain
+                type: integer
+                required: false
                 description: Net elevation gain (feet or meters)
-              -
-                name: units
+              - name: units
+                type: string
+                required: false
                 description: System of measurement to use for the incoming distances/weight (imperial or metric)
             methodResponses:
               - statusCode: 200
                 responseBody:
                   description: A successful response object
                 responseModels:
-                  "application/json": CalculateResponseSuccess
+                  "application/json": "CalculateResponseSuccess"
               - statusCode: 400
                 responseBody:
                   description: An unsuccessful response object due to a bad request
                 responseModels:
-                  "application/json": CalculateResponseError
+                  "application/json": "CalculateResponseError"
               - statusCode: 403
                 responseBody:
                   description: Forbidden, bad or missing API key
