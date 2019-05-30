@@ -38,6 +38,26 @@ custom:
     - dev
     - staging
     - prod
+  documentation:
+    info:
+      version: "0.1" # This must get updated in order for API Gateway to pick up changes
+      title: Calorie calculator
+      description: This API calculates calories burned during an activity
+      contact:
+        name: Colin Busse
+      models:
+        -
+          name: CalculateRunValidResponse
+          description: This is a successful response
+          contentType: "application/json"
+          # @TODO:
+          #schema: ${file(src/functions/api/schema/response/calculate_run_success.json)}
+        -
+          name: CalculateRunBadRequestResponse
+          description: This is an error response due to a bad request
+          contentType: "application/json"
+          # @TODO:
+          #schema: ${file(src/functions/api/schema/response/calculate_run_badrequest.json)}
 
 provider:
   name: aws
@@ -58,5 +78,38 @@ functions:
           method: get
           private: true
           documentation:
-            summary: Calculates calories burned during an activity
-            # @TODO: fill in the rest
+            summary: Calories burned running
+            description: Calculates calories burned while running
+            produces:
+              - application/json
+            requestHeaders:
+              -
+                name: x-api-key
+                description: API key
+            queryParams:
+              -
+                name: distance
+                description: Distance ran (in miles)
+              -
+                name: hours
+                description: The number of hours spent running
+              -
+                name: minutes
+                description: The number of minutes spent running
+              -
+                name: seconds
+                description: The number of seconds spent running
+              -
+                name: weight
+                description: The bodyweight (in pounds) of the athlete
+            methodResponses:
+              - statusCode: 200
+                responseBody:
+                  description: A successful response object
+                responseModels:
+                  "application/json": CalculateRunValidResponse
+              - statusCode: 400
+                responseBody:
+                  description: An unsuccessful response object due to a bad request
+                responseModels:
+                  "application/json": CalculateRunBadRequestResponse
