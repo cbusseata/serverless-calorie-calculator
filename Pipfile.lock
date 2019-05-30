@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "425f7642db0be954fe8b1ebf0fd7fb18c1b8b63814d458f13765896965c3c5d2"
+            "sha256": "85c193340a83f9cb106c49dfcbd91106b0c511091d63496efb73b31883d5c440"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -86,17 +86,19 @@
             ],
             "version": "==1.1.1"
         },
+        "measurement": {
+            "hashes": [
+                "sha256:36ca385ffdccf140a75a7e1d816a4df97a6dd255f16fd2f53dd7ab43632a8835"
+            ],
+            "index": "pypi",
+            "version": "==2.0.1"
+        },
         "mpmath": {
             "hashes": [
-                "sha256:939239f94fd47f29d6b65ecb6066d04839138150e7621aa856164348aa303dc8",
+                "sha256:b7320ae472c8c3989b82e308b6a9fc44593552bd6807c5e82a0b6c90c8fcc88d",
                 "sha256:fc17abe05fbab3382b61a123c398508183406fa132e0223874578e20946499f6"
             ],
             "version": "==1.1.0"
-        },
-        "python-measurement": {
-            "editable": true,
-            "git": "https://github.com/coddingtonbear/python-measurement",
-            "ref": "872876ad1d58bfbb03ca17d5dd2938e1532b7cb4"
         },
         "six": {
             "hashes": [
@@ -200,10 +202,10 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:027cfc6524613de726789072f95d2e4cc64dd1dee8096d42d13f2ead5bd302f5",
-                "sha256:0d05199e1f0b1a8707a1b9c46476d4a49807fb56cb1b0737db1d37feb42fe31d"
+                "sha256:a9f185022cfa69e9ca5f7eabfd5a58b689894cb78a11e3c8c89398a8ccbb8e7f",
+                "sha256:df1403cd3aebeb2b1dcd3515ca062eecb5bd3ea7611f18cba81130c68707e879"
             ],
-            "version": "==0.15"
+            "version": "==0.17"
         },
         "jsonpath-ng": {
             "hashes": [

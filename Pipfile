@@ -11,7 +11,7 @@ restinstance = "==1.0.0rc5"
 [packages]
 flask = "*"
 flask-wtf = "*"
-python-measurement = {editable = true,git = "https://github.com/coddingtonbear/python-measurement"}
+measurement = "*"
 
 [requires]
 python_version = "3.6"
