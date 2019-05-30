@@ -9,7 +9,7 @@ references:
   install_serverless: &install_serverless
     run:
       name: Install serverless
-      command: sudo npm install -g serverless@1.42.3
+      command: npm install -g serverless@1.42.3
 
   install_npm_modules: &install_npm_modules
     run:
@@ -19,12 +19,12 @@ references:
   install_pipenv: &install_pipenv
     run:
       name: Install pipenv
-      command: sudo pip install pipenv
+      command: pip install pipenv
 
   install_python_modules: &install_python_modules
     run:
       name: Install python modules
-      command: sudo pipenv install --system --dev
+      command: pipenv install --system --dev
 
   unit_test: &unit_test
     run:
