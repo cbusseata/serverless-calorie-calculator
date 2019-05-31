@@ -78,6 +78,8 @@ jobs:
       - *install_python_modules
       - *unit_test
       - *sls_deploy_staging
+      - *robot_tests_staging
+      - *store_robot_results_staging
 
   deploy_prod:
     docker:
