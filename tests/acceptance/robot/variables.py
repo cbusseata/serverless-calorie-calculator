@@ -32,7 +32,7 @@ def get_api_key(environment):
     Raises:
         Exception: If we cannot find the API key
     """
-    client = boto3.client('apigateway')
+    client = boto3.client('apigateway', region_name='us-east-1')
 
     api_key_name = 'calorie-calculator-'+environment.lower()+'-test'
 
@@ -70,7 +70,7 @@ def get_base_url(environment):
     Raises:
         Exception: If we cannot find the necessary info for generating the URL
     """
-    client = boto3.client('apigateway')
+    client = boto3.client('apigateway', region_name='us-east-1')
 
     rest_api_name = environment.lower()+'-calorie-calculator'
 
