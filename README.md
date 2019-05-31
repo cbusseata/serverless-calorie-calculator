@@ -4,6 +4,10 @@ Basic serverless demo API for calculating calories burned.
 This repository is integrated with Circle CI and any commit to the master branch that passes unit tests is deployed to 
 a staging environment in AWS, and if the automated acceptance tests pass, it is deployed to an AWS production environment.
 
+NOTE: there is a security vulnerability notice for one of the node modules in package-lock.json.  The offending version
+of cryptiles is a dependency of a dev dependency used only for local development.  It is on the list of next steps to fix,
+but it is NOT deployed to AWS, and there is little concern for it at the moment.
+
 ## Dev Environment
 
 ### Preqrequisites:
@@ -55,3 +59,4 @@ Replace <environment> with 'local' for testing locally.
 The next step is to, during a deploy, download the swagger json file from API Gateway, generate a nice HTML file, and upload
 that to S3 as a publicly available static web page, and add a link to it from this document.
 * Add support for more activities
+* Resolve security issue in dev dependency
