@@ -31,10 +31,20 @@ references:
       name: Run unit tests
       command: pytest tests/unit
 
+  robot_tests_staging: &robot_tests_staging
+    run:
+      name: Run robot tests on staging
+      command: tests/acceptance/runtests.sh staging
+
   robot_tests_prod: &robot_tests_prod
     run:
       name: Run robot tests on production
       command: tests/acceptance/runtests.sh prod
+
+  store_robot_results_staging: &store_robot_results_staging
+    store_artifacts:
+      path: tests/acceptance/results/
+      destination: acceptance/staging/
 
   store_robot_results_prod: &store_robot_results_prod
     store_artifacts:
@@ -80,6 +90,13 @@ jobs:
       - *install_pipenv
       - *install_python_modules
       - *unit_test
+
+      # Deploy to staging first and run acceptance tests there
+      - *sls_deploy_staging
+      - *robot_tests_staging
+      - *store_robot_results_staging
+
+      # Now deploy to production
       - *sls_deploy_prod
       - *robot_tests_prod
       - *store_robot_results_prod
