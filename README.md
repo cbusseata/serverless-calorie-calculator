@@ -22,8 +22,21 @@ make
 
 This will start a single 'app' container, and the API will be available at http://0.0.0.0:3000.
 
+To view logs:
+````bash
+make logs
+````
+
+To stop the dev environment:
+````bash
+make down
+````
+
 To test the API, you must include an x-api-key header ('local-test' for local development).  You can use the
-Postman collection found in the docs directory of this repository.
+Postman collection found in the docs directory of this repository, or use curl.  Example:
+````bash
+curl -H 'x-api-key:local-test' -X GET 'http://0.0.0.0:3000/calculate/walk?distance=2.1&hours=0&minutes=14&seconds=30&bodyweight=185&units=imperial'
+````
 
 ## Adding/removing modules
 Use pipenv from inside the app container
