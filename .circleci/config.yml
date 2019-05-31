@@ -31,6 +31,16 @@ references:
       name: Run unit tests
       command: pytest tests/unit
 
+  robot_tests_prod: &robot_tests_prod
+    run:
+      name: Run robot tests on production
+      command: tests/acceptance/runtests.sh prod
+
+  store_robot_results_prod: &store_robot_results_prod
+    store_artifacts:
+      path: tests/acceptance/results/
+      destination: acceptance/prod/
+
   sls_deploy_staging: &sls_deploy_staging
     run:
       name: Deploy to staging
@@ -59,7 +69,7 @@ jobs:
       - *unit_test
       - *sls_deploy_staging
 
-  build_and_unit_test:
+  deploy_prod:
     docker:
       - image: lambci/lambda:build-python3.6
     steps:
@@ -71,6 +81,8 @@ jobs:
       - *install_python_modules
       - *unit_test
       - *sls_deploy_prod
+      - *robot_tests_prod
+      - *store_robot_results_prod
 
 workflows:
   version: 2
@@ -80,7 +92,7 @@ workflows:
           filters:
             branches:
               only: staging
-      - build_and_unit_test:
+      - deploy_prod:
           filters:
             branches:
               only: master
